@@ -4,7 +4,7 @@ import java.util.Objects;
 public class Main {
 
     public static void main(String[] args) {
-        // Создаем товары
+        // Создаём товары
         Product product1 = new Product(1, "Ноутбук", 75000, "Электроника");
         Product product2 = new Product(2, "Смартфон", 50000, "Электроника");
         Product product3 = new Product(1, "Планшет", 30000, "Электроника");
@@ -26,7 +26,7 @@ public class Main {
         System.out.println("product1.equals(product4): " + product1.equals(product4));
         System.out.println("product1.equals(product5): " + product1.equals(product5));
 
-        // Создаем заказы
+        // Создаём заказы
         Order order1 = new Order("Иванов Иван", new Product[]{product1, product2});
         Order order2 = new Order("Петров Петр", new Product[]{product1, product3});
         Order order3 = new Order("Иванов Иван", new Product[]{product1, product2}); // совпадает с order1
@@ -46,7 +46,6 @@ public class Main {
         System.out.println("order1.equals(order4): " + order1.equals(order4));
     }
 }
-
 class Product {
     private final int id;
     private final String name;
@@ -73,7 +72,6 @@ class Product {
         return id == product.id && Objects.equals(category, product.category);
     }
 
-    // Геттеры могут понадобиться, но не требуются в задании
     public int getId() {
         return id;
     }
@@ -110,8 +108,6 @@ class Order {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Order order = (Order) obj;
-        if (!Objects.equals(customer, order.customer)) return false;
-        if (!Arrays.equals(basket, order.basket)) return false;
-        return true;
+        return Objects.equals(customer, order.customer) && Arrays.equals(basket, order.basket);
     }
 }
